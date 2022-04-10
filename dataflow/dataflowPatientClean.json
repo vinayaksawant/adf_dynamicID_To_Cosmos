@@ -47,6 +47,12 @@
 				},
 				{
 					"name": "doesnotexists"
+				},
+				{
+					"name": "insertTrue"
+				},
+				{
+					"name": "updatecolumn"
 				}
 			],
 			"scriptLines": [
@@ -122,15 +128,17 @@
 				"     validateSchema: false,",
 				"     format: 'document',",
 				"     systemColumns: true) ~> PreviousDataCosmos",
-				"source1 derive(NewDocumentKey = concat(BeneID,ClaimID ),",
-				"          action = ERROR_FUNCTION('')) ~> CreateNewDynamicID",
-				"exists alterRow(upsertIf(true())) ~> AlterRow1",
-				"doesnotexists, PreviousDataCosmos exists(NewDocumentKey == id,",
+				"source1 derive(NewDocumentKey = concat(BeneID,ClaimID )) ~> CreateNewDynamicID",
+				"updatecolumn alterRow(insertIf(Insert == true()),",
+				"     updateIf(Update == true())) ~> AlterRow1",
+				"insertTrue, PreviousDataCosmos exists(NewDocumentKey == id,",
 				"     negate:false,",
 				"     broadcast: 'auto')~> exists",
 				"CreateNewDynamicID, PreviousDataCosmos exists(NewDocumentKey == id,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> doesnotexists",
+				"doesnotexists derive(Insert = true()) ~> insertTrue",
+				"exists derive(Update = true()) ~> updatecolumn",
 				"CreateNewDynamicID sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
