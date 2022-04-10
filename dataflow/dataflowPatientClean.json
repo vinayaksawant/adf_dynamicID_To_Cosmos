@@ -53,8 +53,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
-				"     skipLines: 1) ~> source1",
+				"     limit: 100,",
+				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 derive(NewDocumentKey = concat(Column_1, Column_2)) ~> CreateNewDynamicID"
 			]
 		}
