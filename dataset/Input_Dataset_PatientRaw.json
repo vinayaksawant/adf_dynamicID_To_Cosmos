@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "patientdata1_10.csv",
+				"fileName": "schemaandtestpatientdata.csv",
 				"folderPath": "input",
 				"container": "adfprocessing"
 			},
