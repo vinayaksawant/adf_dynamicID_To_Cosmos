@@ -10,6 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(\n'Processed_Patient_',\nformatDateTime(utcNow()),\n'.csv'\n)",
+					"type": "Expression"
+				},
 				"folderPath": "output",
 				"container": "adfprocessing"
 			},
