@@ -1,0 +1,13 @@
+{
+	"name": "Cosmos_Db_Patient",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Cosmos_Db_Patient",
+		"annotations": [],
+		"type": "CosmosDb",
+		"typeProperties": {
+			"connectionString": "AccountEndpoint=https://vinayakcosmosdb.documents.azure.com:443/;Database=db_patientdata;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDE2MkJBQTQ0LTZBNzYtNEJEMS04MDc0LTBFNDgyOTNDMDQ3Rl9jMzlmMjM5Ni0yMWFhLTRmNmQtYmY4Yy04OGQyNmI0ZDNiMWYiDQp9"
+		}
+	}
+}
