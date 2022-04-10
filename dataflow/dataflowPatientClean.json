@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "Output_Dataset_PatientCosmos_Upsert",
+						"type": "DatasetReference"
+					},
+					"name": "PreviousDataCosmos"
 				}
 			],
 			"sinks": [
@@ -25,7 +32,7 @@
 						"referenceName": "Output_Dataset_PatientCosmos_Upsert",
 						"type": "DatasetReference"
 					},
-					"name": "outputtocosmos"
+					"name": "outputtocosmosupdates"
 				}
 			],
 			"transformations": [
@@ -34,6 +41,12 @@
 				},
 				{
 					"name": "AlterRow1"
+				},
+				{
+					"name": "exists"
+				},
+				{
+					"name": "doesnotexists"
 				}
 			],
 			"scriptLines": [
@@ -73,8 +86,51 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 derive(NewDocumentKey = concat(BeneID,ClaimID )) ~> CreateNewDynamicID",
-				"CreateNewDynamicID alterRow(upsertIf(true())) ~> AlterRow1",
+				"source(output(",
+				"          AdmissionDt as date,",
+				"          AttendingPhysician as string,",
+				"          BeneID as string,",
+				"          ClaimEndDt as date,",
+				"          ClaimID as string,",
+				"          ClaimStartDt as date,",
+				"          ClmAdmitDiagnosisCode as integer,",
+				"          ClmDiagnosisCode_1 as short,",
+				"          ClmDiagnosisCode_10 as string,",
+				"          ClmDiagnosisCode_2 as short,",
+				"          ClmDiagnosisCode_3 as integer,",
+				"          ClmDiagnosisCode_4 as string,",
+				"          ClmDiagnosisCode_5 as string,",
+				"          ClmDiagnosisCode_6 as string,",
+				"          ClmDiagnosisCode_7 as string,",
+				"          ClmDiagnosisCode_8 as string,",
+				"          ClmDiagnosisCode_9 as string,",
+				"          ClmProcedureCode_1 as string,",
+				"          ClmProcedureCode_2 as string,",
+				"          ClmProcedureCode_3 as string,",
+				"          ClmProcedureCode_4 as string,",
+				"          ClmProcedureCode_5 as string,",
+				"          ClmProcedureCode_6 as string,",
+				"          DeductibleAmtPaid as short,",
+				"          DiagnosisGroupCode as short,",
+				"          DischargeDt as date,",
+				"          InscClaimAmtReimbursed as short,",
+				"          OperatingPhysician as string,",
+				"          OtherPhysician as string,",
+				"          Provider as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'document',",
+				"     systemColumns: true) ~> PreviousDataCosmos",
+				"source1 derive(NewDocumentKey = concat(BeneID,ClaimID ),",
+				"          action = ERROR_FUNCTION('')) ~> CreateNewDynamicID",
+				"exists alterRow(upsertIf(true())) ~> AlterRow1",
+				"doesnotexists, PreviousDataCosmos exists(NewDocumentKey == id,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists",
+				"CreateNewDynamicID, PreviousDataCosmos exists(NewDocumentKey == id,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> doesnotexists",
 				"CreateNewDynamicID sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
@@ -109,14 +165,14 @@
 				"          Column_29 as string,",
 				"          Column_30 as string",
 				"     ),",
-				"     partitionFileNames:['patientsoutput.csv'],",
+				"     partitionFileNames:[(concat(concat('patientOutput',toString (currentTimestamp()) ), '.csv'))],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> outputtoblob",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
-				"     insertable:true,",
+				"     insertable:false,",
 				"     updateable:false,",
 				"     upsertable:true,",
 				"     format: 'document',",
@@ -157,7 +213,7 @@
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
 				"          id = NewDocumentKey",
-				"     )) ~> outputtocosmos"
+				"     )) ~> outputtocosmosupdates"
 			]
 		}
 	}
