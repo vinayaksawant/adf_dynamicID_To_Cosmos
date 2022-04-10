@@ -187,6 +187,7 @@
 				"     partitionFileNames:[(concat('Patient',\r",
 				"    concat(\r",
 				"        toString(currentDate())\r",
+				"       , toString(currentTimestamp())\r",
 				"        , '.csv'\r",
 				"    )\r",
 				"))],",
