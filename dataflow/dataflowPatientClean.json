@@ -31,6 +31,9 @@
 			"transformations": [
 				{
 					"name": "CreateNewDynamicID"
+				},
+				{
+					"name": "AlterRow1"
 				}
 			],
 			"scriptLines": [
@@ -71,6 +74,8 @@
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 derive(NewDocumentKey = concat(BeneID,ClaimID )) ~> CreateNewDynamicID",
+				"CreateNewDynamicID alterRow(updateIf(true()),",
+				"     upsertIf(true())) ~> AlterRow1",
 				"CreateNewDynamicID sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
@@ -109,15 +114,51 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> outputtoblob",
-				"CreateNewDynamicID sink(allowSchemaDrift: true,",
+				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     deletable:false,",
+				"     deletable:true,",
 				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
+				"     updateable:true,",
+				"     upsertable:true,",
 				"     format: 'document',",
+				"     partitionKey: ['/id'],",
+				"     throughput: 400,",
+				"     totalWriteThroughputBudget: 400,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> outputtocosmos"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          BeneID,",
+				"          ClaimID,",
+				"          ClaimStartDt,",
+				"          ClaimEndDt,",
+				"          Provider,",
+				"          InscClaimAmtReimbursed,",
+				"          AttendingPhysician,",
+				"          OperatingPhysician,",
+				"          OtherPhysician,",
+				"          AdmissionDt,",
+				"          ClmAdmitDiagnosisCode,",
+				"          DeductibleAmtPaid,",
+				"          DischargeDt,",
+				"          DiagnosisGroupCode,",
+				"          ClmDiagnosisCode_1,",
+				"          ClmDiagnosisCode_2,",
+				"          ClmDiagnosisCode_3,",
+				"          ClmDiagnosisCode_4,",
+				"          ClmDiagnosisCode_5,",
+				"          ClmDiagnosisCode_6,",
+				"          ClmDiagnosisCode_7,",
+				"          ClmDiagnosisCode_8,",
+				"          ClmDiagnosisCode_9,",
+				"          ClmDiagnosisCode_10,",
+				"          ClmProcedureCode_1,",
+				"          ClmProcedureCode_2,",
+				"          ClmProcedureCode_3,",
+				"          ClmProcedureCode_4,",
+				"          ClmProcedureCode_5,",
+				"          ClmProcedureCode_6,",
+				"          id = NewDocumentKey",
+				"     )) ~> outputtocosmos"
 			]
 		}
 	}
