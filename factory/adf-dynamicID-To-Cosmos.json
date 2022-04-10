@@ -1,0 +1,9 @@
+{
+	"name": "adf-dynamicID-To-Cosmos",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9081cc96-a591-463e-903e-3592ee5994ed",
+		"tenantId": "4c5a23c4-504e-4f6e-be3a-76026750e51f"
+	}
+}
