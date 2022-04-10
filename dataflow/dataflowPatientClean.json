@@ -33,6 +33,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "outputtocosmosupdates"
+				},
+				{
+					"dataset": {
+						"referenceName": "Output_Dataset_PatientCosmos_Upsert",
+						"type": "DatasetReference"
+					},
+					"name": "outputtocosmosinsert"
 				}
 			],
 			"transformations": [
@@ -40,7 +47,7 @@
 					"name": "CreateNewDynamicID"
 				},
 				{
-					"name": "AlterRow1"
+					"name": "AlterRowUpdate"
 				},
 				{
 					"name": "exists"
@@ -53,6 +60,9 @@
 				},
 				{
 					"name": "updatecolumn"
+				},
+				{
+					"name": "alterRowinsert"
 				}
 			],
 			"scriptLines": [
@@ -130,8 +140,8 @@
 				"     systemColumns: true) ~> PreviousDataCosmos",
 				"source1 derive(NewDocumentKey = concat(BeneID,ClaimID )) ~> CreateNewDynamicID",
 				"updatecolumn alterRow(insertIf(Insert == true()),",
-				"     updateIf(Update == true())) ~> AlterRow1",
-				"insertTrue, PreviousDataCosmos exists(NewDocumentKey == id,",
+				"     updateIf(Update == true())) ~> AlterRowUpdate",
+				"CreateNewDynamicID, PreviousDataCosmos exists(NewDocumentKey == id,",
 				"     negate:false,",
 				"     broadcast: 'auto')~> exists",
 				"CreateNewDynamicID, PreviousDataCosmos exists(NewDocumentKey == id,",
@@ -139,6 +149,7 @@
 				"     broadcast: 'auto')~> doesnotexists",
 				"doesnotexists derive(Insert = true()) ~> insertTrue",
 				"exists derive(Update = true()) ~> updatecolumn",
+				"insertTrue alterRow(insertIf(Insert == true())) ~> alterRowinsert",
 				"CreateNewDynamicID sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
@@ -177,7 +188,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> outputtoblob",
-				"AlterRow1 sink(allowSchemaDrift: true,",
+				"AlterRowUpdate sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:false,",
@@ -221,7 +232,16 @@
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
 				"          id = NewDocumentKey",
-				"     )) ~> outputtocosmosupdates"
+				"     )) ~> outputtocosmosupdates",
+				"alterRowinsert sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'document',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> outputtocosmosinsert"
 			]
 		}
 	}
