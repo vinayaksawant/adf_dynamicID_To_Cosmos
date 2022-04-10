@@ -55,7 +55,7 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 derive(NewDocumentKey = concat(Column_1, Column_2)) ~> CreateNewDynamicID"
+				"source1 derive(NewDocumentKey = concat(BeneID,ClaimID )) ~> CreateNewDynamicID"
 			]
 		}
 	}
