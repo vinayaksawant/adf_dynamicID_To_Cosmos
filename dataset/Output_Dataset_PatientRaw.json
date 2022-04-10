@@ -5,12 +5,6 @@
 			"referenceName": "Link_AzureBlobStorage_DataFlow",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"outputfilename": {
-				"type": "string",
-				"defaultValue": "@concat('Patient',  '_',  formatDateTime(     convertTimeZone(         utcNow(),         'UTC',         'Eastern Standard Time'         ),     'yyyy-MM-ddTHHmmss'),  '.csv')"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
