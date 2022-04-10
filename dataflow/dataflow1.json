@@ -1,0 +1,56 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "InputRawSource",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          BeneID as string,",
+				"          ClaimID as string,",
+				"          ClaimStartDt as string,",
+				"          ClaimEndDt as string,",
+				"          Provider as string,",
+				"          InscClaimAmtReimbursed as string,",
+				"          AttendingPhysician as string,",
+				"          OperatingPhysician as string,",
+				"          OtherPhysician as string,",
+				"          AdmissionDt as string,",
+				"          ClmAdmitDiagnosisCode as string,",
+				"          DeductibleAmtPaid as string,",
+				"          DischargeDt as string,",
+				"          DiagnosisGroupCode as string,",
+				"          ClmDiagnosisCode_1 as string,",
+				"          ClmDiagnosisCode_2 as string,",
+				"          ClmDiagnosisCode_3 as string,",
+				"          ClmDiagnosisCode_4 as string,",
+				"          ClmDiagnosisCode_5 as string,",
+				"          ClmDiagnosisCode_6 as string,",
+				"          ClmDiagnosisCode_7 as string,",
+				"          ClmDiagnosisCode_8 as string,",
+				"          ClmDiagnosisCode_9 as string,",
+				"          ClmDiagnosisCode_10 as string,",
+				"          ClmProcedureCode_1 as string,",
+				"          ClmProcedureCode_2 as string,",
+				"          ClmProcedureCode_3 as string,",
+				"          ClmProcedureCode_4 as string,",
+				"          ClmProcedureCode_5 as string,",
+				"          ClmProcedureCode_6 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1"
+			]
+		}
+	}
+}
