@@ -184,7 +184,7 @@
 				"          Column_29 as string,",
 				"          Column_30 as string",
 				"     ),",
-				"     partitionFileNames:[(concat('Patient', '_', formatDateTime(convertTimeZone(utcnow(),'UTC','Eastern Standard Time'),'yyyy-MM-ddTHHmmss'), '.csv'))],",
+				"     partitionFileNames:[''],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> outputtoblob",
