@@ -1,0 +1,109 @@
+{
+	"name": "PriorLoadedData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Cosmos_Db_Patient",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CosmosDbSqlApiCollection",
+		"schema": {
+			"type": "object",
+			"properties": {
+				"ClmDiagnosisCode_9": {
+					"type": "string"
+				},
+				"ClmAdmitDiagnosisCode": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_5": {
+					"type": "string"
+				},
+				"ClmProcedureCode_6": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_6": {
+					"type": "string"
+				},
+				"ClmProcedureCode_5": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_7": {
+					"type": "string"
+				},
+				"ClmProcedureCode_4": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_8": {
+					"type": "string"
+				},
+				"ClmProcedureCode_3": {
+					"type": "string"
+				},
+				"DiagnosisGroupCode": {
+					"type": "string"
+				},
+				"OtherPhysician": {
+					"type": "string"
+				},
+				"BeneID": {
+					"type": "string"
+				},
+				"ClaimEndDt": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_1": {
+					"type": "string"
+				},
+				"ClmProcedureCode_2": {
+					"type": "string"
+				},
+				"OperatingPhysician": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_2": {
+					"type": "string"
+				},
+				"ClmProcedureCode_1": {
+					"type": "string"
+				},
+				"AttendingPhysician": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_3": {
+					"type": "string"
+				},
+				"InscClaimAmtReimbursed": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_4": {
+					"type": "string"
+				},
+				"ClaimID": {
+					"type": "string"
+				},
+				"ClmDiagnosisCode_10": {
+					"type": "string"
+				},
+				"DischargeDt": {
+					"type": "string"
+				},
+				"Provider": {
+					"type": "string"
+				},
+				"ClaimStartDt": {
+					"type": "string"
+				},
+				"DeductibleAmtPaid": {
+					"type": "string"
+				},
+				"AdmissionDt": {
+					"type": "string"
+				}
+			}
+		},
+		"typeProperties": {
+			"collectionName": "cont_patient"
+		}
+	}
+}
