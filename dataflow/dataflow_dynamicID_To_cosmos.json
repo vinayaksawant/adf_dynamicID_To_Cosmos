@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "compose1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          BeneID as string,",
@@ -51,7 +55,8 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false,",
-				"     skipLines: 1) ~> source1"
+				"     skipLines: 1) ~> source1",
+				"compose(composition: 'undefined') ~> compose1@(temporary)"
 			]
 		}
 	}
