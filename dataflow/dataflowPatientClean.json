@@ -91,7 +91,7 @@
 				"          ClmProcedureCode_5 as string,",
 				"          ClmProcedureCode_6 as string",
 				"     ),",
-				"     allowSchemaDrift: false,",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> source1",
