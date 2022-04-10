@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat(\n'Processed_Patient_',\nformatDateTime(utcNow()),\n'.csv'\n)",
+					"value": "@concat('Patient', \n'_', \nformatDateTime(\n    convertTimeZone(\n        utcNow(),\n        'UTC',\n        'Eastern Standard Time'\n        ),\n    'yyyy-MM-ddTHHmmss'),\n '.csv')",
 					"type": "Expression"
 				},
 				"folderPath": "output",
