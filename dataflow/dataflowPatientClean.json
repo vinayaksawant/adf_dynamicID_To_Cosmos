@@ -9,7 +9,7 @@
 						"referenceName": "Input_Dataset_PatientRaw",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "sourcerawfile"
 				},
 				{
 					"dataset": {
@@ -101,7 +101,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     limit: 100,",
-				"     ignoreNoFilesFound: false) ~> source1",
+				"     ignoreNoFilesFound: true,",
+				"     moveFiles: ['/input','input']) ~> sourcerawfile",
 				"source(output(",
 				"          ClmDiagnosisCode_9 as string,",
 				"          ClmAdmitDiagnosisCode as string,",
@@ -138,7 +139,7 @@
 				"     validateSchema: false,",
 				"     format: 'document',",
 				"     systemColumns: true) ~> PriorLoadedData",
-				"source1 derive(NewDocumentKey = concat(BeneID,ClaimID )) ~> CreateNewDynamicID",
+				"sourcerawfile derive(NewDocumentKey = concat(BeneID,ClaimID )) ~> CreateNewDynamicID",
 				"updatecolumn alterRow(updateIf(Update==true())) ~> AlterRowUpdate",
 				"CreateNewDynamicID, PriorLoadedData exists(NewDocumentKey == id,",
 				"     negate:false,",
