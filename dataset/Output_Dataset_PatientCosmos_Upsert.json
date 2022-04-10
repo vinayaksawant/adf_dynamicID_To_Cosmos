@@ -1,0 +1,15 @@
+{
+	"name": "Output_Dataset_PatientCosmos_Upsert",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Cosmos_Db_Patient",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CosmosDbSqlApiCollection",
+		"schema": {},
+		"typeProperties": {
+			"collectionName": "cont_patient"
+		}
+	}
+}

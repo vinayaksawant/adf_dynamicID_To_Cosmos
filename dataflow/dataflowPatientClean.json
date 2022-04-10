@@ -19,6 +19,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "outputtoblob"
+				},
+				{
+					"dataset": {
+						"referenceName": "Output_Dataset_PatientCosmos_Upsert",
+						"type": "DatasetReference"
+					},
+					"name": "outputtocosmos"
 				}
 			],
 			"transformations": [
@@ -101,7 +108,16 @@
 				"     partitionFileNames:['patientsoutput.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> outputtoblob"
+				"     partitionBy('hash', 1)) ~> outputtoblob",
+				"CreateNewDynamicID sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'document',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> outputtocosmos"
 			]
 		}
 	}
