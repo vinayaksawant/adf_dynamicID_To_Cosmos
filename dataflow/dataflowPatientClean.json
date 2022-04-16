@@ -251,6 +251,8 @@
 				"     format: 'document',",
 				"     partitionKey: ['/id'],",
 				"     throughput: 400,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
 				"          BeneID,",
 				"          ClaimID,",
