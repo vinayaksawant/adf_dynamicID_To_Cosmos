@@ -1,5 +1,5 @@
 {
-	"name": "Output_Dataset_PatientRaw",
+	"name": "Output_File_Dataset_PatientRaw",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Link_AzureBlobStorage_DataFlow",

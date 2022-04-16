@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Output_Dataset_PatientRaw",
+						"referenceName": "Output_File_Dataset_PatientRaw",
 						"type": "DatasetReference"
 					},
 					"name": "outputtoblob"
@@ -242,7 +242,7 @@
 				"          ClmProcedureCode_4,",
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
-				"          id = NewDocumentKey",
+				"          NewDocumentKey",
 				"     )) ~> outputtocosmosupdates",
 				"alterRowinsert sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
