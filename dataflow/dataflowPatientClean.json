@@ -207,7 +207,7 @@
 				"     upsertable:false,",
 				"     format: 'document',",
 				"     partitionKey: ['/id'],",
-				"     throughput: 100,",
+				"     throughput: 400,",
 				"     totalWriteThroughputBudget: 400,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
