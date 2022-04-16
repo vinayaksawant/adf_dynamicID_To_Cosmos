@@ -1,5 +1,5 @@
 {
-	"name": "Output_Dataset_PatientCosmos_Upsert",
+	"name": "Output_Cosmos_Dataset_Patient_Upsert",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Cosmos_Db_Patient",

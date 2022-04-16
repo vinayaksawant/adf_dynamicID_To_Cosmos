@@ -29,14 +29,14 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "Output_Dataset_PatientCosmos_Upsert",
+						"referenceName": "Output_Cosmos_Dataset_Patient_Upsert",
 						"type": "DatasetReference"
 					},
 					"name": "outputtocosmosupdates"
 				},
 				{
 					"dataset": {
-						"referenceName": "Output_Dataset_PatientCosmos_Upsert",
+						"referenceName": "Output_Cosmos_Dataset_Patient_Upsert",
 						"type": "DatasetReference"
 					},
 					"name": "outputtocosmosinsert"
