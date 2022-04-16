@@ -251,7 +251,8 @@
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'document',",
-				"     partitionKey: ['/id']) ~> outputtocosmosinsert"
+				"     partitionKey: ['/id'],",
+				"     throughput: 400) ~> outputtocosmosinsert"
 			]
 		}
 	}
