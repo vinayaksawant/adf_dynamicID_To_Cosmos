@@ -209,8 +209,6 @@
 				"     partitionKey: ['/id'],",
 				"     throughput: 400,",
 				"     totalWriteThroughputBudget: 400,",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
 				"          BeneID,",
 				"          ClaimID,",
