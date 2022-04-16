@@ -251,8 +251,6 @@
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'document',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
 				"          BeneID,",
 				"          ClaimID,",
@@ -285,7 +283,7 @@
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
 				"          NewDocumentKey,",
-				"          id = NewDocumentKey",
+				"          Insert",
 				"     )) ~> outputtocosmosinsert"
 			]
 		}
