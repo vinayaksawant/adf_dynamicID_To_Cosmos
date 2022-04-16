@@ -102,7 +102,7 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: true,",
-				"     wildcardPaths:['patient*.csv']) ~> sourcerawfile",
+				"     wildcardPaths:['patientdata1_10_initial.csv']) ~> sourcerawfile",
 				"source(output(",
 				"          ClmDiagnosisCode_9 as string,",
 				"          ClmAdmitDiagnosisCode as string,",
